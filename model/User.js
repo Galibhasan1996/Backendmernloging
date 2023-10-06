@@ -1,6 +1,8 @@
 
 const mongoose = require('mongoose');
 const bcrypt = require('bcrypt');
+const color = require('colors');
+
 
 const userSchema = new mongoose.Schema({
     name: {
@@ -28,12 +30,12 @@ const userSchema = new mongoose.Schema({
 
 userSchema.pre('save', async function (next) {
     const user = this
-    console.log("before hashing " + user.password);
+    console.log(`before hashing ${user.password}`.rainbow);
     if (!user.isModified('password')) {
         return next();
     }
     user.password = await bcrypt.hash(user.password, 10)
-    console.log("after hashing " + user.password);
+    console.log(`after hashing ${user.password}`.rainbow);
     next()
 })
 

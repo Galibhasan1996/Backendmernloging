@@ -10,6 +10,7 @@ const bodyParser = require('body-parser')
 require('./db.js')
 require('./model/User.js')
 const authrouter = require('./router/authRouter.js')
+const requireToken = require('./midllewares/authRequireToken.js')
 
 app.use(bodyParser.json())
 app.use(authrouter)
@@ -17,8 +18,9 @@ app.use(authrouter)
 
 
 
-app.get('/', (req, res) => {
-    res.status(200).send({ message: 'this is home page 👌' })
+app.get('/', requireToken, (req, res) => {
+    console.log(req.user);
+    res.status(200).send({ message: 'this is home page 👌', user: req.user })
 })
 
 
