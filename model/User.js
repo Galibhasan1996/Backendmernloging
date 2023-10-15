@@ -12,13 +12,21 @@ const userSchema = new mongoose.Schema({
     email: {
         type: String,
         required: true,
-        unique: true // Ensure that each admin's email is unique
+        unique: true
     },
     password: {
         type: String,
         required: true
     },
+    confirmpassword: {
+        type: String,
+        required: true
+    },
     dob: {
+        type: String,
+        required: true
+    },
+    address: {
         type: String,
         required: true
     }
